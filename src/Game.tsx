@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 
 const gridRows = 36
 const gridCols = 48
@@ -52,7 +52,6 @@ const countNeighbors = (grid: number[][], i: number, j: number) => {
     if (grid[i + 1][j + 1] == 1) {
         count += 1
     }
-    console.log(count)
     return count;
 }
 
@@ -93,31 +92,29 @@ const logGrid = (grid: number[][]) => {
     };
 }
 
-
-
-
 export default function Game() {
     const [grid, setGrid] = useState(() => {
         return randomizeGrid();
     });
 
-    const handleClick = () => {
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
         const newGrid = updateGrid(grid)
-        setGrid(newGrid)
-        logGrid(grid);
-    }
+        setGrid(newGrid);
+        }, 1000); // Update every 1 second
+    
+        return () => clearInterval(intervalId); // Cleanup on unmount
+      }, [grid]);
 
     return (
         <div>
-            <button onClick={handleClick}>
-                Click me
-            </button>
-            <div className="m-auto grid grid-cols-48 grid-rows-36 gap-1">
+            <div className="m-auto grid grid-cols-48 grid-rows-36 gap-1 blur-sm">
                 {grid.map((rows, i) =>
-                        rows.map((col, j) => (
+                        rows.map((_, j) => (
                             <div
                                 key={`${i}-${j}`} 
-                                className={`${grid[i][j] == 0 ? "bg-white" : "bg-black"} w-2 h-2`}>
+                                className={`${grid[i][j] == 0 ? "bg-white" : "bg-black shadow-lg"} w-6 h-6 m-auto rounded transition duration-500 ease-in-out`}>
                             </div>
                         ))
                 )}
