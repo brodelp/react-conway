@@ -108,18 +108,16 @@ export default function Game() {
       }, [grid]);
 
     return (
-        <div>
-            <div className="m-auto grid grid-cols-48 grid-rows-36 gap-1 blur-sm">
+            <div className="z-0 size-full grid grid-cols-48 grid-rows-36 gap-1 blur-sm">
                 {grid.map((rows, i) =>
                         rows.map((_, j) => (
                             <div
                                 key={`${i}-${j}`} 
-                                className={`${grid[i][j] == 0 ? "bg-white" : "bg-black shadow-lg"} w-6 h-6 m-auto rounded transition duration-500 ease-in-out`}>
+                                className={`${grid[i][j] == 0 ? "bg-white" : "bg-black shadow-lg"} w-5 h-5 m-auto rounded transition duration-500 ease-in-out`}>
                             </div>
                         ))
                 )}
             </div>
-        </div>
     )
 
 }
