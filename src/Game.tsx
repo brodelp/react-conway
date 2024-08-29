@@ -102,18 +102,18 @@ export default function Game() {
         const intervalId = setInterval(() => {
         const newGrid = updateGrid(grid)
         setGrid(newGrid);
-        }, 1000); // Update every 1 second
+        }, 500);
     
         return () => clearInterval(intervalId); // Cleanup on unmount
       }, [grid]);
 
     return (
-            <div className="z-0 size-full grid grid-cols-48 grid-rows-36 gap-1 blur-sm">
+            <div className="z-0 size-full grid grid-cols-48 grid-rows-36 gap-0 blur-sm">
                 {grid.map((rows, i) =>
                         rows.map((_, j) => (
                             <div
                                 key={`${i}-${j}`} 
-                                className={`${grid[i][j] == 0 ? "bg-white" : "bg-black shadow-lg"} w-5 h-5 m-auto rounded transition duration-500 ease-in-out`}>
+                                className={`${grid[i][j] == 0 ? "bg-white" : "bg-black shadow-lg"} transition duration-100 ease-in-out`}>
                             </div>
                         ))
                 )}
