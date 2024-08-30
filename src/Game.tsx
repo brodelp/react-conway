@@ -100,8 +100,8 @@ export default function Game() {
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-        const newGrid = updateGrid(grid)
-        setGrid(newGrid);
+            const newGrid = updateGrid(grid)
+            setGrid(newGrid);
         }, 500);
     
         return () => clearInterval(intervalId); // Cleanup on unmount
